@@ -52,27 +52,30 @@ enum _ResultStatusGB {
   notFound,
   found,
 }
+
 enum _ResultStatusGG {
   notStarted,
   notFound,
   found,
 }
+
 enum _ResultStatusGP {
   notStarted,
   notFound,
   found,
 }
+
 enum _ResultStatusGM {
   notStarted,
   notFound,
   found,
 }
+
 enum _ResultStatusGT {
   notStarted,
   notFound,
   found,
 }
-
 
 class _PlantRecogniserState extends State<PlantRecogniser> {
   bool _isAnalyzing = false;
@@ -88,8 +91,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   _ResultStatusGP _resultStatusGP = _ResultStatusGP.notStarted;
   _ResultStatusGM _resultStatusGM = _ResultStatusGM.notStarted;
   _ResultStatusGT _resultStatusGT = _ResultStatusGT.notStarted;
-
-
 
   String _plantLabel = ''; // Name of Error Message
   double _accuracy = 0.0;
@@ -124,7 +125,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   late Classifier? _classifier_GM;
   late Classifier? _classifier_GT;
 
-
   @override
   void initState() {
     super.initState();
@@ -135,7 +135,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     _loadClassifier_GP();
     _loadClassifier_GM();
     _loadClassifier_GT();
-
   }
 
   Future<void> _loadClassifier() async {
@@ -179,11 +178,12 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     );
     _classifier_GB = classifier3;
   }
+
   Future<void> _loadClassifier_GG() async {
     debugPrint(
       'Start loading of gurami Classifier with '
-          'labels at $_labelsFileName_gg, '
-          'model at $_modelFileName_gg',
+      'labels at $_labelsFileName_gg, '
+      'model at $_modelFileName_gg',
     );
 
     final classifier3 = await Classifier.loadWith(
@@ -192,11 +192,12 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     );
     _classifier_GG = classifier3;
   }
+
   Future<void> _loadClassifier_GP() async {
     debugPrint(
       'Start loading of pathirana Classifier with '
-          'labels at $_labelsFileName_gp, '
-          'model at $_modelFileName_gp',
+      'labels at $_labelsFileName_gp, '
+      'model at $_modelFileName_gp',
     );
 
     final classifier3 = await Classifier.loadWith(
@@ -205,11 +206,12 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     );
     _classifier_GP = classifier3;
   }
+
   Future<void> _loadClassifier_GM() async {
     debugPrint(
       'Start loading of mosquito Classifier with '
-          'labels at $_labelsFileName_gm, '
-          'model at $_modelFileName_gm',
+      'labels at $_labelsFileName_gm, '
+      'model at $_modelFileName_gm',
     );
 
     final classifier3 = await Classifier.loadWith(
@@ -218,11 +220,12 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     );
     _classifier_GM = classifier3;
   }
+
   Future<void> _loadClassifier_GT() async {
     debugPrint(
       'Start loading of tilapi Classifier with '
-          'labels at $_labelsFileName_gt, '
-          'model at $_modelFileName_gt',
+      'labels at $_labelsFileName_gt, '
+      'model at $_modelFileName_gt',
     );
 
     final classifier3 = await Classifier.loadWith(
@@ -232,44 +235,157 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     _classifier_GT = classifier3;
   }
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      width: 400,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: _buildTitle(),
-          ),
-          const SizedBox(height: 80),
-          _buildPhotolView(),
-          const SizedBox(height: 20),
-          _buildResultView(),
-          const Spacer(flex: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildPickPhotoButton(
-                title: 'Camera',
-                source: ImageSource.camera,
-                icon: Icons.camera_alt,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Color.fromARGB(255, 230, 245, 255),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100),
+          child: AppBar(
+            backgroundColor: Colors.white12,
+            automaticallyImplyLeading: false,
+            actions: [],
+            flexibleSpace: FlexibleSpaceBar(
+              title: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 14),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: _buildTitle(),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(width: 20),
-              _buildPickPhotoButton(
-                title: 'Gallery',
-                source: ImageSource.gallery,
-                icon: Icons.collections,
-              ),
-            ],
+              centerTitle: true,
+              expandedTitleScale: 1.0,
+            ),
+            elevation: 0,
           ),
-          const Spacer(),
-        ],
+        ),
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Stack(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Container(
+                            height: 150,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x2B202529),
+                                  offset: Offset(0, 2),
+                                )
+                              ],
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(16),
+                                bottomRight: Radius.circular(16),
+                                topLeft: Radius.circular(16),
+                                topRight: Radius.circular(16),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: _buildPhotolView(),
+                        )
+                      ],
+                    ),
+                    ListView(
+                      padding: EdgeInsets.zero,
+                      primary: false,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        _buildResultView(),
+                      ],
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 230, 245, 255),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _buildPickPhotoButton(
+                            title: 'Camera',
+                            source: ImageSource.camera,
+                            icon: Icons.camera_alt,
+                          ),
+                          const SizedBox(width: 20),
+                          _buildPickPhotoButton(
+                            title: 'Gallery',
+                            source: ImageSource.gallery,
+                            icon: Icons.collections,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
+    // return Container(
+    //   color: Colors.white,
+    //   width: 400,
+    //   child: Column(
+    //     mainAxisSize: MainAxisSize.max,
+    //     children: [
+    //       const Spacer(),
+    //       Padding(
+    //         padding: const EdgeInsets.only(top: 30),
+    //         child: _buildTitle(),
+    //       ),
+    //       const SizedBox(height: 80),
+    //       _buildPhotolView(),
+    //       const SizedBox(height: 20),
+    //       _buildResultView(),
+    //       const Spacer(flex: 5),
+    //       Row(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         children: [
+    //           _buildPickPhotoButton(
+    //             title: 'Camera',
+    //             source: ImageSource.camera,
+    //             icon: Icons.camera_alt,
+    //           ),
+    //           const SizedBox(width: 20),
+    //           _buildPickPhotoButton(
+    //             title: 'Gallery',
+    //             source: ImageSource.gallery,
+    //             icon: Icons.collections,
+    //           ),
+    //         ],
+    //       ),
+    //       const Spacer(),
+    //     ],
+    //   ),
+    // );
   }
 
   Widget _buildPhotolView() {
@@ -370,7 +486,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     final resultCategoryGM = _classifier_GM!.predict(imageInput);
     final resultCategoryGT = _classifier_GT!.predict(imageInput);
 
-
     final result = resultCategory.score >= 0.8
         ? _ResultStatus.found
         : _ResultStatus.notFound;
@@ -453,7 +568,6 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   }
 
   Widget _buildResultView() {
-
     var title = '';
     if (_resultStatus == _ResultStatus.notFound) {
       title = 'Healthy';
@@ -480,25 +594,20 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     } else if (title == 'Bandula Pethiya') {
       print('this is bandula');
       gender = _GBLabel;
-    }
-    else if (title == 'Gourami') {
+    } else if (title == 'Gourami') {
       print('this is Gourami');
       gender = _GBLabel;
-    }
-    else if (title == 'Mosqito Fish') {
+    } else if (title == 'Mosqito Fish') {
       print('this is Mosqito');
       gender = _GBLabel;
-    }
-    else if (title == 'Pathirana Salaya') {
+    } else if (title == 'Pathirana Salaya') {
       print('this is Pathirana');
       gender = _GBLabel;
-    }
-    else if (title == 'Thilapia') {
+    } else if (title == 'Thilapia') {
       print('this is Thilapia');
       gender = _GBLabel;
-    }
-    else {
-      gender='male';
+    } else {
+      gender = 'male';
       print('else part');
     }
 
@@ -522,14 +631,286 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 40),
-          Text('Endemic Species: $title', style: kResultRatingTextStyle),
-          const SizedBox(height: 5),
-          Text('Dieseses: $dieseses', style: kResultRatingTextStyle),
-          const SizedBox(height: 5),
-          Text('Harmful: $Harmful', style: kResultRatingTextStyle),
-          const SizedBox(height: 5),
-          Text('Gender: $gender', style: kResultRatingTextStyle),
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 230, 245, 255),
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                child: Icon(
+                                  Icons.type_specimen,
+                                  color: Colors.grey,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 4,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Endemic Species:',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 2, 0, 0),
+                                  child: Text(title)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 230, 245, 255),
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                child: Icon(
+                                  Icons.admin_panel_settings_outlined,
+                                  color: Colors.grey,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 4,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Dieseses:',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 2, 0, 0),
+                                  child: Text(dieseses)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 230, 245, 255),
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                child: Icon(
+                                  Icons.gpp_maybe_sharp,
+                                  color: Colors.grey,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 4,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Harmful:',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 2, 0, 0),
+                                  child: Text(Harmful)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 230, 245, 255),
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              width: 36,
+                              height: 36,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                                child: Icon(
+                                  Icons.face,
+                                  color: Colors.grey,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 4,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Gender:',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 2, 0, 0),
+                                  child: Text(gender)),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
