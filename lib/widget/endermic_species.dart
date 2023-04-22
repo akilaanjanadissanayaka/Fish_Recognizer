@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -289,7 +291,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                             height: 150,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   blurRadius: 4,
                                   color: Color(0x2B202529),
@@ -325,19 +327,24 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                       decoration: BoxDecoration(
                         color: Color.fromARGB(255, 230, 245, 255),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      child: Column(
                         children: [
-                          _buildPickPhotoButton(
-                            title: 'Camera',
-                            source: ImageSource.camera,
-                            icon: Icons.camera_alt,
-                          ),
-                          const SizedBox(width: 20),
-                          _buildPickPhotoButton(
-                            title: 'Gallery',
-                            source: ImageSource.gallery,
-                            icon: Icons.collections,
+                          SizedBox(height: 20), // set the margin value here
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _buildPickPhotoButton(
+                                title: 'Camera',
+                                source: ImageSource.camera,
+                                icon: Icons.camera_alt,
+                              ),
+                              const SizedBox(width: 20),
+                              _buildPickPhotoButton(
+                                title: 'Gallery',
+                                source: ImageSource.gallery,
+                                icon: Icons.collections,
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -431,13 +438,17 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: kColorLightYellow),
-                SizedBox(width: 10),
+                Icon(
+                  icon,
+                  color: kColorLightYellow,
+                  size: 20,
+                ),
+                SizedBox(width: 15),
                 Text(
                   title,
                   style: const TextStyle(
                     fontFamily: kButtonFont,
-                    fontSize: 20.0,
+                    fontSize: 15.0,
                     fontWeight: FontWeight.w600,
                     color: kColorLightYellow,
                   ),
@@ -660,7 +671,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                                 child: Icon(
-                                  Icons.type_specimen,
+                                  Icons.category,
                                   color: Colors.grey,
                                   size: 20,
                                 ),
@@ -668,7 +679,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                             ),
                             Container(
                               width: 4,
-                              height: 60,
+                              height: 40,
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey,
                               ),
@@ -678,20 +689,33 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Endemic Species:',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 15, 0, 0),
+                          child: Container(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 2, 0, 0),
-                                  child: Text(title)),
-                            ],
+                                      10, 0, 0, 0),
+                                  child: Text(
+                                    'Endemic Species:',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 0.4),
+                                  ),
+                                ),
+                                Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 0, 0),
+                                    child: Text(
+                                      title,
+                                      style: TextStyle(
+                                        letterSpacing: 0.4,
+                                      ),
+                                    )),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -730,7 +754,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                                 child: Icon(
-                                  Icons.admin_panel_settings_outlined,
+                                  Icons.coronavirus,
                                   color: Colors.grey,
                                   size: 20,
                                 ),
@@ -738,7 +762,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                             ),
                             Container(
                               width: 4,
-                              height: 60,
+                              height: 40,
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey,
                               ),
@@ -748,19 +772,30 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                          child: Column(
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 15, 0, 0),
+                          child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Dieseses:',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                child: Text(
+                                  'Dieseses:',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.4),
+                                ),
                               ),
                               Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 2, 0, 0),
-                                  child: Text(dieseses)),
+                                      10, 0, 0, 0),
+                                  child: Text(
+                                    dieseses,
+                                    style: TextStyle(
+                                      letterSpacing: 0.4,
+                                    ),
+                                  )),
                             ],
                           ),
                         ),
@@ -808,7 +843,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                             ),
                             Container(
                               width: 4,
-                              height: 60,
+                              height: 40,
                               decoration: BoxDecoration(
                                 color: Colors.blueGrey,
                               ),
@@ -818,19 +853,30 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                          child: Column(
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 15, 0, 0),
+                          child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Harmful:',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                child: Text(
+                                  'Harmful:',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.4),
+                                ),
                               ),
                               Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 2, 0, 0),
-                                  child: Text(Harmful)),
+                                      10, 0, 0, 0),
+                                  child: Text(
+                                    Harmful,
+                                    style: TextStyle(
+                                      letterSpacing: 0.4,
+                                    ),
+                                  )),
                             ],
                           ),
                         ),
@@ -862,11 +908,11 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                             Container(
                               width: 36,
                               height: 36,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Colors.white,
                                 shape: BoxShape.circle,
                               ),
-                              child: Padding(
+                              child: const Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                                 child: Icon(
@@ -878,8 +924,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                             ),
                             Container(
                               width: 4,
-                              height: 60,
-                              decoration: BoxDecoration(
+                              height: 40,
+                              decoration: const BoxDecoration(
                                 color: Colors.blueGrey,
                               ),
                             ),
@@ -888,19 +934,31 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                          child: Column(
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 15, 0, 0),
+                          child: Row(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Gender:',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                                child: Text(
+                                  'Gender:',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.4,
+                                  ),
+                                ),
                               ),
                               Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 2, 0, 0),
-                                  child: Text(gender)),
+                                      10, 0, 0, 0),
+                                  child: Text(
+                                    gender,
+                                    style: TextStyle(
+                                      letterSpacing: 0.4,
+                                    ),
+                                  )),
                             ],
                           ),
                         ),

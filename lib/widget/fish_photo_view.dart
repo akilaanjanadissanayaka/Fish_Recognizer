@@ -9,19 +9,24 @@ class PlantPhotoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 100,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Container(
+          width: 350,
+          height: 135,
+          decoration: BoxDecoration(
+            color: Colors.white70,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: (file == null)
+              ? _buildEmptyView()
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.file(file!, fit: BoxFit.contain),
+                ),
+        ),
       ),
-      child: (file == null)
-          ? _buildEmptyView()
-          : ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.file(file!, fit: BoxFit.contain),
-            ),
     );
   }
 
