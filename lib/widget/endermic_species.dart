@@ -246,7 +246,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: Color.fromARGB(255, 230, 245, 255),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        // backgroundColor: Color.fromARGB(255, 230, 245, 255),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100),
           child: AppBar(
@@ -280,76 +281,83 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Stack(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Container(
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              boxShadow: const [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  color: Color(0x2B202529),
-                                  offset: Offset(0, 2),
-                                )
-                              ],
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(16),
-                                bottomRight: Radius.circular(16),
-                                topLeft: Radius.circular(16),
-                                topRight: Radius.circular(16),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Center(
+                              child: Container(
+                                height: 150,
+                                width: 350,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      blurRadius: 4,
+                                      color: Color(0x2B202529),
+                                      offset: Offset(0, 2),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(16),
+                                    bottomRight: Radius.circular(16),
+                                    topLeft: Radius.circular(16),
+                                    topRight: Radius.circular(16),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: _buildPhotolView(),
-                        )
-                      ],
-                    ),
-                    ListView(
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        _buildResultView(),
-                      ],
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 230, 245, 255),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(height: 20), // set the margin value here
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              _buildPickPhotoButton(
-                                title: 'Camera',
-                                source: ImageSource.camera,
-                                icon: Icons.camera_alt,
-                              ),
-                              const SizedBox(width: 20),
-                              _buildPickPhotoButton(
-                                title: 'Gallery',
-                                source: ImageSource.gallery,
-                                icon: Icons.collections,
-                              ),
-                            ],
-                          ),
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: _buildPhotolView(),
+                          )
                         ],
                       ),
-                    ),
-                  ],
+                      ListView(
+                        padding: EdgeInsets.zero,
+                        primary: false,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          _buildResultView(),
+                        ],
+                      ),
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          // color: Color.fromARGB(255, 230, 245, 255),
+                          color: Color.fromARGB(255, 255, 255, 255),
+
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 20), // set the margin value here
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildPickPhotoButton(
+                                  title: 'Camera',
+                                  source: ImageSource.camera,
+                                  icon: Icons.camera_alt,
+                                ),
+                                const SizedBox(width: 15),
+                                _buildPickPhotoButton(
+                                  title: 'Gallery',
+                                  source: ImageSource.gallery,
+                                  icon: Icons.collections,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -431,7 +439,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       child: TextButton(
         onPressed: () => _onPickPhoto(source),
         child: Container(
-          width: 120,
+          width: 130,
           // height: 30,
           color: kColorBrown,
           child: Center(
@@ -647,7 +655,9 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 230, 245, 255),
+                  // color: Color.fromARGB(255, 230, 245, 255),
+                  color: Color.fromARGB(255, 255, 255, 255),
+
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
@@ -730,7 +740,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 230, 245, 255),
+                  // color: Color.fromARGB(255, 230, 245, 255),
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
@@ -811,7 +822,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 230, 245, 255),
+                  // color: Color.fromARGB(255, 230, 245, 255),
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),
@@ -892,7 +904,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 230, 245, 255),
+                  // color: Color.fromARGB(255, 230, 245, 255),
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 0),

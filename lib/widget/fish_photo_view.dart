@@ -10,7 +10,7 @@ class PlantPhotoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
       child: Center(
         child: Container(
           width: 350,
@@ -19,12 +19,27 @@ class PlantPhotoView extends StatelessWidget {
             color: Colors.white70,
             borderRadius: BorderRadius.circular(10),
           ),
-          child: (file == null)
-              ? _buildEmptyView()
-              : ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.file(file!, fit: BoxFit.contain),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Container(
+                  width: 350,
+                  height: 135,
+                  decoration: BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: (file == null)
+                      ? _buildEmptyView()
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.file(file!, fit: BoxFit.contain),
+                        ),
                 ),
+              ),
+            ),
+          ),
         ),
       ),
     );

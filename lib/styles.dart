@@ -6,7 +6,7 @@ const kDisplayFont = 'SquadaOne';
 
 const kColorGreen = Color(0xFF395144);
 const kColorLightGreen = Color(0XFF4E6C50);
-const kColorBrown = Color(0xFF7EB0D2);
+const kColorBrown = Color( 0xFFA29BFE);
 const kColorLightYellow = Color(0xFFF0EBCE);
 
 const kColorRed = Color(0xFFD96666);
@@ -25,7 +25,9 @@ const kTitleTextStyle = TextStyle(
   fontFamily: kDisplayFont,
   fontSize: 50.0,
   letterSpacing: 1.0,
-  color: Color(0xFF8CC3E9),
+  // color: Color(0xFF8CC3E9),
+  color: Color( 0xFFA29BFE),
+
   decoration: TextDecoration.none,
 );
 
